@@ -2,3 +2,12 @@ spring:
   application:
     name: backend
 
+  datasource:
+    url: jdbc:postgresql://${POSTGRES_HOST}:5432/photoatom?ssl=true&sslmode=verify-ca&sslrootcert=certificates/database/ca.crt&sslcert=certificates/database/tls.crt&sslkey=certificates/database/tls.pk8
+    username: ${POSTGRES_USERNAME}
+    password: ${POSTGRES_PASSWORD}
+
+  jpa:
+    hibernate:
+      ddl-auto: create-drop
+
