@@ -1,3 +1,13 @@
+# Valkey Database Connection Parameters.
+valkey:
+  host: ${VALKEY_HOST}
+  port: ${VALKEY_PORT}
+  password: ${VALKEY_PASSWORD}
+  caCertPath: ${VALKEY_CA_CERT_PATH}
+  caCertPassword: ${VALKEY_CA_CERT_PASSWORD}
+  userCertPath: ${VALKEY_USER_CERT_PATH}
+  userCertPassword: ${VALKEY_USER_CERT_PASSWORD}
+
 spring:
   application:
     name: backend
