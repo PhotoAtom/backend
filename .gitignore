@@ -23,8 +23,6 @@
 hs_err_pid*
 replay_pid*
 backend/mvn
-backend/certificates/database/ca.crt
-backend/certificates/database/tls.crt
-backend/certificates/database/tls.key
-backend/certificates/database/tls.pk8
-backend/certificates/cache/bundle.crt
+backend/certificates/database/**
+backend/certificates/cache/**
+.vscode/**

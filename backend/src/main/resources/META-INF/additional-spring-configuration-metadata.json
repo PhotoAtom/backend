@@ -1,0 +1,40 @@
+{
+  "properties": [
+    {
+      "name": "valkey.host",
+      "type": "java.lang.String",
+      "description": "Valkey Database Host"
+    },
+    {
+      "name": "valkey.port",
+      "type": "java.lang.String",
+      "description": "Valkey Database Port"
+    },
+    {
+      "name": "valkey.password",
+      "type": "java.lang.String",
+      "description": "Valkey Database User Password"
+    },
+    {
+      "name": "valkey.caCertPath",
+      "type": "java.lang.String",
+      "description": "Valkey CA Certificate Path"
+    },
+    {
+      "name": "valkey.caCertPassword",
+      "type": "java.lang.String",
+      "description": "Valkey CA Certificate Password"
+    },
+    {
+      "name": "valkey.userCertPath",
+      "type": "java.lang.String",
+      "description": "Valkey User Certificate Path"
+    },
+    {
+      "name": "valkey.userCertPassword",
+      "type": "java.lang.String",
+      "description": "Valkey User Certificate Password"
+    }
+  ]
+}
+
