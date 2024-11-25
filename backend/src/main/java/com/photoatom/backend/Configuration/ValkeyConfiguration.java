@@ -1,4 +1,4 @@
-package com.photoatom.backend;
+package com.photoatom.backend.Configuration;
 
 import java.io.FileInputStream;
 import java.io.IOException;
@@ -94,8 +94,8 @@ public class ValkeyConfiguration {
 
     // Generating SSL Factory for creating TLS connections with Valkey Database.
     // Generate Truststore and Keystore using:
-    // openssl pkcs12 -export -in ./redis_user.crt -inkey ./redis_user_private.key -out redis-user-keystore.p12 -name "redis"
-    // keytool -importcert -keystore truststore.jks -storepass REPLACE_WITH_YOUR_PASSWORD  -file redis_ca.pem
+    // openssl pkcs12 -export -in certificates/cache/tls.crt -inkey certificates/cache/tls.key -out certificates/cache/valkeystore.p12 -name "redis"
+    // keytool -importcert -keystore certificates/cache/truststore.jks -storepass changeit -file certificates/cache/ca.crt
     SSLSocketFactory sslFactory = createSslSocketFactory(caCertPath, caCertPassword, userCertPath, userCertPassword);
 
     // Specifying SSL Connection configuration
