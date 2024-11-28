@@ -34,6 +34,26 @@
       "name": "valkey.userCertPassword",
       "type": "java.lang.String",
       "description": "Valkey User Certificate Password"
+    },
+    {
+      "name": "keycloak.ca-cert-path",
+      "type": "java.lang.String",
+      "description": "Keycloak CA Certificate Path"
+    },
+    {
+      "name": "keycloak.caCertPassword",
+      "type": "java.lang.String",
+      "description": "Keycloak CA Certificate Password"
+    },
+    {
+      "name": "keycloak.userCertPath",
+      "type": "java.lang.String",
+      "description": "Keycloak User Certificate Path"
+    },
+    {
+      "name": "keycloak.userCertPassword",
+      "type": "java.lang.String",
+      "description": "Keycloak User Certificate Password"
     }
   ]
 }
