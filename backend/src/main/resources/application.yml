@@ -8,9 +8,22 @@ valkey:
   userCertPath: ${VALKEY_USER_CERT_PATH}
   userCertPassword: ${VALKEY_USER_CERT_PASSWORD}
 
+# Keycloak SSL Certificates
+keycloak:
+  caCertPath: ${KEYCLOAK_CA_CERT_PATH}
+  caCertPassword: ${KEYCLOAK_CA_CERT_PASSWORD}
+  userCertPath: ${KEYCLOAK_USER_CERT_PATH}
+  userCertPassword: ${KEYCLOAK_USER_CERT_PASSWORD}
+
 spring:
   application:
     name: backend
+
+  security:
+    oauth2:
+      resourceserver:
+        jwt:
+          issuer-uri: ${KEYCLOAK_URL}
 
   datasource:
     url: jdbc:postgresql://${POSTGRES_HOST}:5432/photoatom?ssl=true&sslmode=verify-ca&sslrootcert=certificates/database/ca.crt&sslcert=certificates/database/tls.crt&sslkey=certificates/database/tls.pk8
