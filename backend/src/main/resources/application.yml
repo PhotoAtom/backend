@@ -26,7 +26,7 @@ spring:
           issuer-uri: ${KEYCLOAK_URL}
 
   datasource:
-    url: jdbc:postgresql://${POSTGRES_HOST}:5432/photoatom?ssl=true&sslmode=verify-ca&sslrootcert=certificates/database/ca.crt&sslcert=certificates/database/tls.crt&sslkey=certificates/database/tls.pk8
+    url: jdbc:postgresql://${POSTGRES_HOST}:5432/photoatom?ssl=true&sslmode=verify-ca&sslrootcert=${PSQL_CA_CERT_PATH}&sslcert=${PSQL_USER_CERT_PATH}&sslkey=${PSQL_USER_CERT_KEY_PATH}
     username: ${POSTGRES_USERNAME}
     password: ${POSTGRES_PASSWORD}
 
