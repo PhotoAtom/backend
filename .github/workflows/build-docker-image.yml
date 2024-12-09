@@ -1,0 +1,34 @@
+name: Build and store PhotoAtom Backend Docker Image
+
+on:
+  push:
+    branches:
+      - feature/**
+      - bug/**
+    paths:
+      - backend/**
+      - .github/workflows/build-docker-image.yml
+  pull_request:
+    paths:
+      - backend/**
+      - .github/workflows/build-docker-image.yml
+    branches:
+      - main
+    types:
+      - opened
+      - synchronize
+      - closed
+
+jobs:
+  build_push_image:
+    name: Building and storing PhotoAtom Backend Docker Image
+    uses: PhotoAtom/automations/.github/workflows/build-docker-image.yml@feature/8/docker-pipeline
+    with:
+      dev_version_name: SNAPSHOT
+      image_name: photoatom_backend
+      image_proper_name: PhotoAtom Backend
+      pre_build_script: |
+        sed -i "s|0.0.1-SNAPSHOT|$SEMVER_VERSION|g" pom.xml
+      build_path: backend
+    secrets: inherit
+
