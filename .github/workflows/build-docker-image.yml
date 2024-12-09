@@ -31,4 +31,3 @@ jobs:
         sed -i "s|0.0.1-SNAPSHOT|$SEMVER_VERSION|g" pom.xml
       build_path: backend
     secrets: inherit
-
