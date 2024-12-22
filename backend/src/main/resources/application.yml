@@ -8,13 +8,6 @@ valkey:
   userCertPath: ${VALKEY_USER_CERT_PATH}
   userCertPassword: ${VALKEY_USER_CERT_PASSWORD}
 
-# Keycloak SSL Certificates
-keycloak:
-  caCertPath: ${KEYCLOAK_CA_CERT_PATH}
-  caCertPassword: ${KEYCLOAK_CA_CERT_PASSWORD}
-  userCertPath: ${KEYCLOAK_USER_CERT_PATH}
-  userCertPassword: ${KEYCLOAK_USER_CERT_PASSWORD}
-
 spring:
   application:
     name: backend
