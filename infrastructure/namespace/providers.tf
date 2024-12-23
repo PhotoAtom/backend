@@ -14,7 +14,3 @@ terraform {
 provider "kubernetes" {
 
 }
-
-provider "null" {
-
-}
