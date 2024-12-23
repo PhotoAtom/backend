@@ -32,7 +32,7 @@ jobs:
     uses: PhotoAtom/automations/.github/workflows/tofu-deploy.yml@main
     with:
       deployment_name: PhotoAtom Backend Namespace
-      folder_path: namespace
+      folder_path: infrastructure/namespace
       runners: photoatom
     secrets: inherit
 
@@ -42,6 +42,6 @@ jobs:
     uses: PhotoAtom/automations/.github/workflows/tofu-deploy.yml@main
     with:
       deployment_name: PhotoAtom Backend Secrets
-      folder_path: secrets
+      folder_path: infrastructure/secrets
       runners: photoatom
     secrets: inherit
