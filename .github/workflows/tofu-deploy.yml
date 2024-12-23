@@ -45,3 +45,31 @@ jobs:
       folder_path: infrastructure/secrets
       runners: photoatom
     secrets: inherit
+
+  configuration_deploy:
+    needs: [secrets_deploy]
+    name: PhotoAtom Backend Configuration Deployment onto Self Hosted K3d Cluster
+    uses: PhotoAtom/automations/.github/workflows/tofu-deploy.yml@main
+    with:
+      deployment_name: PhotoAtom Backend Configuration
+      folder_path: infrastructure/configuration
+      runners: photoatom
+      pre_plan_script: |
+        echo "Setting up PostgreSQL Key File"
+        kubectl get secret -n postgres photoatom-pg-cert -o json | jq -rc '.data."tls.key"' | base64 -d > tls.key
+        openssl pkcs8 -topk8 -inform PEM -outform DER -in tls.key -out tls.pk8 -nocrypt
+
+        echo "Setting up Valkey Certificate Files"
+        mkdir cache && cd cache
+        kubectl get secret -n valkey valkey-tls -o json | jq -rc '.data."tls.key"' | base64 -d > tls.key
+        kubectl get secret -n valkey valkey-tls -o json | jq -rc '.data."tls.crt"' | base64 -d > tls.crt
+        kubectl get secret -n valkey valkey-tls -o json | jq -rc '.data."ca.crt"' | base64 -d > ca.crt
+
+        KEYSTORE_PASSWORD=$(kubectl get secret -n backend valkey-certificates-passwords -o json | jq -rc '.data.VALKEY_USER_CERT_PASSWORD' | base64 -d)
+
+        TRUSTSTORE_PASSWORD=$(kubectl get secret -n backend valkey-certificates-passwords -o json | jq -rc '.data.VALKEY_CA_CERT_PASSWORD' | base64 -d)
+
+        openssl pkcs12 -export -in tls.crt -inkey tls.key -out keystore.p12 -name "valkey" -passout pass:$KEYSTORE_PASSWORD
+        keytool -importcert -keystore truststore.jks -storepass $TRUSTSTORE_PASSWORD -file ca.crt -noprompt
+        cd ..
+    secrets: inherit
