@@ -130,19 +130,21 @@ resource "kubernetes_manifest" "photoatom_certificate" {
       "issuerRef" = {
         "name" = "${var.photoatom_issuer_name}"
       }
-      "jks" = {
-        "create" : true
-        "passwordSecretRef" : {
-          "key" : "photoatom-certificate-passwords"
-          "name" : "jksPassword"
+      "keystore" = {
+        "jks" = {
+          "create" : true
+          "passwordSecretRef" : {
+            "key" : "photoatom-certificate-passwords"
+            "name" : "jksPassword"
+          }
+          "alias" : "backend"
         }
-        "alias" : "backend"
-      }
-      "pkcs12" : {
-        "create" : true
-        "passwordSecretRef" : {
-          "key" : "photoatom-certificate-passwords"
-          "name" : "pkcs12Password"
+        "pkcs12" : {
+          "create" : true
+          "passwordSecretRef" : {
+            "key" : "photoatom-certificate-passwords"
+            "name" : "pkcs12Password"
+          }
         }
       }
     }
