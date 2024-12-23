@@ -1,0 +1,47 @@
+name: PhotoAtom Backend Deployment onto Self Hosted K3D Cluster
+
+on:
+  workflow_dispatch:
+  push:
+    branches:
+      - feature/**
+      - bug/**
+      - main
+    paths:
+      - certificates/**
+      - namespace/**
+      - secrets/**
+      - configuration/**
+      - .github/**
+  pull_request:
+    paths:
+      - certificates/**
+      - namespace/**
+      - secrets/**
+      - configuration/**
+      - .github/**
+    branches:
+      - main
+    types:
+      - opened
+      - synchronize
+
+jobs:
+  namespace_deploy:
+    name: PhotoAtom Backend Namespace Deployment onto Self Hosted K3d Cluster
+    uses: PhotoAtom/automations/.github/workflows/tofu-deploy.yml@main
+    with:
+      deployment_name: PhotoAtom Backend Namespace
+      folder_path: namespace
+      runners: photoatom
+    secrets: inherit
+
+  secrets_deploy:
+    needs: [namespace_deploy]
+    name: PhotoAtom Backend Secrets Deployment onto Self Hosted K3d Cluster
+    uses: PhotoAtom/automations/.github/workflows/tofu-deploy.yml@main
+    with:
+      deployment_name: PhotoAtom Backend Secrets
+      folder_path: secrets
+      runners: photoatom
+    secrets: inherit
