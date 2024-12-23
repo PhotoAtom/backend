@@ -1,3 +1,43 @@
+// Certificate Passwords
+resource "random_password" "keystore_password" {
+  length           = 16
+  lower            = true
+  numeric          = true
+  special          = true
+  override_special = "-_*"
+  min_special      = 2
+}
+
+resource "random_password" "truststore_password" {
+  length           = 16
+  lower            = true
+  numeric          = true
+  special          = true
+  override_special = "-_*"
+  min_special      = 2
+}
+
+
+resource "kubernetes_secret" "certificate_passwords" {
+  metadata {
+    name      = "photoatom-certificate-passwords"
+    namespace = var.namespace
+
+    labels = {
+      app       = "photoatom"
+      component = "secret"
+    }
+  }
+
+  binary_data = {
+    "jksPassword"    = random_password.truststore_password.result
+    "pkcs12Password" = random_password.keystore_password.result
+  }
+
+  type = "Opaque"
+}
+
+
 // Certificate Authority to be used with PhotoAtom Backend
 resource "kubernetes_manifest" "photoatom_ca" {
   manifest = {
@@ -89,6 +129,21 @@ resource "kubernetes_manifest" "photoatom_certificate" {
       "secretName" = "photoatom-tls"
       "issuerRef" = {
         "name" = "${var.photoatom_issuer_name}"
+      }
+      "jks" = {
+        "create" : true
+        "passwordSecretRef" : {
+          "key" : "photoatom-certificate-passwords"
+          "name" : "jksPassword"
+        }
+        "alias" : "backend"
+      }
+      "pkcs12" : {
+        "create" : true
+        "passwordSecretRef" : {
+          "key" : "photoatom-certificate-passwords"
+          "name" : "pkcs12Password"
+        }
       }
     }
   }
