@@ -8,17 +8,17 @@ on:
       - bug/**
       - main
     paths:
-      - certificates/**
-      - namespace/**
-      - secrets/**
-      - configuration/**
+      - infrastructure/certificates/**
+      - infrastructure/namespace/**
+      - infrastructure/secrets/**
+      - infrastructure/configuration/**
       - .github/**
   pull_request:
     paths:
-      - certificates/**
-      - namespace/**
-      - secrets/**
-      - configuration/**
+      - infrastructure/certificates/**
+      - infrastructure/namespace/**
+      - infrastructure/secrets/**
+      - infrastructure/configuration/**
       - .github/**
     branches:
       - main
