@@ -130,7 +130,7 @@ resource "kubernetes_manifest" "photoatom_certificate" {
       "issuerRef" = {
         "name" = "${var.photoatom_issuer_name}"
       }
-      "keystore" = {
+      "keystores" = {
         "jks" = {
           "create" : true
           "passwordSecretRef" : {
