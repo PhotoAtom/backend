@@ -32,7 +32,7 @@ resource "kubernetes_config_map" "photoatom_database_configurations" {
   }
 
   data = {
-    "POSTGRES_HOST" = "${var.postgres_cluster_name}-rw.${var.postgres_namespace}.svc"
+    "POSTGRES_HOST" = base64encode("${var.postgres_cluster_name}-rw.${var.postgres_namespace}.svc")
   }
 }
 
@@ -143,8 +143,8 @@ resource "kubernetes_config_map" "photoatom_valkey_configuration" {
   }
 
   data = {
-    VALKEY_HOST = "valkey-node-0.${var.valkey_namespace}.svc"
-    VALKEY_PORT = 6379
+    VALKEY_HOST = base64encode("valkey-node-0.${var.valkey_namespace}.svc")
+    VALKEY_PORT = base64encode(6379)
   }
 }
 
@@ -160,6 +160,6 @@ resource "kubernetes_config_map" "photoatom_keycloak_configuration" {
   }
 
   data = {
-    KEYCLOAK_URL = "${var.keycloak_host_name}.${var.photoatom_domain}"
+    KEYCLOAK_URL = base64encode("${var.keycloak_host_name}.${var.photoatom_domain}")
   }
 }
