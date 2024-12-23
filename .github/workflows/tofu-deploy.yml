@@ -73,3 +73,13 @@ jobs:
         keytool -importcert -keystore truststore.jks -storepass $TRUSTSTORE_PASSWORD -file ca.crt -noprompt
         cd ..
     secrets: inherit
+
+  certificates_deploy:
+    needs: [configuration_deploy]
+    name: PhotoAtom Backend Certificates Deployment onto Self Hosted K3d Cluster
+    uses: PhotoAtom/automations/.github/workflows/tofu-deploy.yml@main
+    with:
+      deployment_name: PhotoAtom Backend Certificates
+      folder_path: infrastructure/certificates
+      runners: photoatom
+    secrets: inherit
