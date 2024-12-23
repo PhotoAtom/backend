@@ -26,6 +26,9 @@ on:
       - opened
       - synchronize
 
+concurrency:
+  group: infra-deploy
+
 jobs:
   namespace_deploy:
     name: PhotoAtom Backend Namespace Deployment onto Self Hosted K3d Cluster
