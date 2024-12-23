@@ -29,8 +29,8 @@ resource "kubernetes_secret" "valkey_certificates" {
   }
 
   binary_data = {
-    "VALKEY_CA_CERT_PASSWORD"   = random_password.truststore_password.result
-    "VALKEY_USER_CERT_PASSWORD" = random_password.keystore_password.result
+    "VALKEY_CA_CERT_PASSWORD"   = base64encode(random_password.truststore_password.result)
+    "VALKEY_USER_CERT_PASSWORD" = base64encode(random_password.keystore_password.result)
   }
 
   type = "Opaque"

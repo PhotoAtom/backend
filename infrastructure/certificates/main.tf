@@ -30,8 +30,8 @@ resource "kubernetes_secret" "certificate_passwords" {
   }
 
   binary_data = {
-    "jksPassword"    = random_password.truststore_password.result
-    "pkcs12Password" = random_password.keystore_password.result
+    "jksPassword"    = base64encode(random_password.truststore_password.result)
+    "pkcs12Password" = base64encode(random_password.keystore_password.result)
   }
 
   type = "Opaque"
@@ -130,19 +130,21 @@ resource "kubernetes_manifest" "photoatom_certificate" {
       "issuerRef" = {
         "name" = "${var.photoatom_issuer_name}"
       }
-      "jks" = {
-        "create" : true
-        "passwordSecretRef" : {
-          "key" : "photoatom-certificate-passwords"
-          "name" : "jksPassword"
+      "keystores" = {
+        "jks" = {
+          "create" : true
+          "passwordSecretRef" : {
+            "name" : "photoatom-certificate-passwords"
+            "key" : "jksPassword"
+          }
+          "alias" : "backend"
         }
-        "alias" : "backend"
-      }
-      "pkcs12" : {
-        "create" : true
-        "passwordSecretRef" : {
-          "key" : "photoatom-certificate-passwords"
-          "name" : "pkcs12Password"
+        "pkcs12" : {
+          "create" : true
+          "passwordSecretRef" : {
+            "name" : "photoatom-certificate-passwords"
+            "key" : "pkcs12Password"
+          }
         }
       }
     }

@@ -104,6 +104,10 @@ resource "kubernetes_secret" "valkey_certificates" {
     "truststore.jks" = "${filebase64("${path.module}/cache/truststore.jks")}"
   }
 
+  lifecycle {
+    ignore_changes = [binary_data]
+  }
+
   type = "Opaque"
 }
 
