@@ -30,8 +30,8 @@ resource "kubernetes_secret" "certificate_passwords" {
   }
 
   binary_data = {
-    "jksPassword"    = base64encode(random_password.truststore_password.result)
-    "pkcs12Password" = base64encode(random_password.keystore_password.result)
+    "SSL_CA_CERTIFICATE_PASSWORD" = base64encode(random_password.truststore_password.result)
+    "SSL_CERTIFICATE_PASSWORD"    = base64encode(random_password.keystore_password.result)
   }
 
   type = "Opaque"
