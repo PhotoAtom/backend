@@ -37,6 +37,10 @@ ENV PSQL_CA_CERT_PATH=''
 ENV PSQL_USER_CERT_PATH=''
 ENV PSQL_USER_CERT_KEY_PATH=''
 
+# SSL Certificates Configuration
+ENV SSL_CERTIFICATE_PATH=''
+ENV SSL_CERTIFICATE_PASSWORD=''
+
 COPY --from=build /app/build/target/backend-*.jar backend.jar
 
 USER ${CUSTOM_USER}

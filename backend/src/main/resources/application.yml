@@ -8,6 +8,13 @@ valkey:
   userCertPath: ${VALKEY_USER_CERT_PATH}
   userCertPassword: ${VALKEY_USER_CERT_PASSWORD}
 
+server:
+  ssl:
+    enabled: true
+    key-store-type: PKCS12
+    key-store: ${SSL_CERTIFICATE_PATH}
+    key-store-password: ${SSL_CERTIFICATE_PASSWORD}
+
 spring:
   application:
     name: backend
