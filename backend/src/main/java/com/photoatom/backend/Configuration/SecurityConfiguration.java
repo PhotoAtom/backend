@@ -106,6 +106,7 @@ public class SecurityConfiguration {
 
     // Methods and paths to protect with authentication
     http.authorizeHttpRequests(requests -> {
+      requests.requestMatchers("/actuator/**").permitAll();
       requests.requestMatchers("/dummy").authenticated();
       requests.anyRequest().denyAll();
     });

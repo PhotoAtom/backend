@@ -6,12 +6,12 @@ on:
     branches:
       - feature/**
       - bug/**
-      - main
     paths:
       - infrastructure/certificates/**
       - infrastructure/namespace/**
       - infrastructure/secrets/**
       - infrastructure/configuration/**
+      - backend/**
       - .github/**
   pull_request:
     paths:
@@ -19,12 +19,14 @@ on:
       - infrastructure/namespace/**
       - infrastructure/secrets/**
       - infrastructure/configuration/**
+      - backend/**
       - .github/**
     branches:
       - main
     types:
       - opened
       - synchronize
+      - closed
 
 concurrency:
   group: infra-deploy
