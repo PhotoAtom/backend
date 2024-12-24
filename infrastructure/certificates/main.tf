@@ -135,7 +135,7 @@ resource "kubernetes_manifest" "photoatom_certificate" {
           "create" : true
           "passwordSecretRef" : {
             "name" : "photoatom-certificate-passwords"
-            "key" : "jksPassword"
+            "key" : "SSL_CA_CERTIFICATE_PASSWORD"
           }
           "alias" : "backend"
         }
@@ -143,7 +143,7 @@ resource "kubernetes_manifest" "photoatom_certificate" {
           "create" : true
           "passwordSecretRef" : {
             "name" : "photoatom-certificate-passwords"
-            "key" : "pkcs12Password"
+            "key" : "SSL_CERTIFICATE_PASSWORD"
           }
         }
       }
