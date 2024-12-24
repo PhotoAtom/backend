@@ -26,5 +26,5 @@ replay_pid*
 backend/mvn
 backend/certificates/database/**
 backend/certificates/cache/**
-backend/certificates/keycloak/**
+backend/certificates/server/*.p12
 .vscode/**
