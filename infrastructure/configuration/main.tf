@@ -147,7 +147,7 @@ resource "kubernetes_config_map" "photoatom_valkey_configuration" {
   }
 
   data = {
-    VALKEY_HOST = "valkey-node-0.${var.valkey_namespace}.svc"
+    VALKEY_HOST = "valkey-node-0.valkey-headless.${var.valkey_namespace}.svc.cluster.local"
     VALKEY_PORT = 6379
   }
 }
@@ -164,6 +164,6 @@ resource "kubernetes_config_map" "photoatom_keycloak_configuration" {
   }
 
   data = {
-    KEYCLOAK_URL = "${var.keycloak_host_name}.${var.photoatom_domain}"
+    KEYCLOAK_URL = "https://${var.keycloak_host_name}.${var.photoatom_domain}/realms/PhotoAtom"
   }
 }
