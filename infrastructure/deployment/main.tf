@@ -165,3 +165,31 @@ resource "kubernetes_deployment" "backend_deployment" {
   }
 }
 
+// Service Object for PhotoAtom Backend
+resource "kubernetes_service" "backend_service" {
+  metadata {
+    name      = "photoatom"
+    namespace = var.namespace
+    labels = {
+      app       = "photoatom"
+      component = "service"
+    }
+  }
+
+  spec {
+
+    selector = {
+      app       = "photoatom"
+      component = "pod"
+    }
+
+    session_affinity = "ClientIP"
+    port {
+      port        = "8443"
+      target_port = "backend-port"
+    }
+
+    type = "ClusterIP"
+  }
+
+}
