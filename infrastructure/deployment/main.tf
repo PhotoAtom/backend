@@ -193,3 +193,48 @@ resource "kubernetes_service" "backend_service" {
   }
 
 }
+
+// Ingress Object for PhotoAtom Backend
+resource "kubernetes_ingress_v1" "backend_ingress" {
+  metadata {
+    name      = "photoatom-backend-ingress"
+    namespace = var.namespace
+    labels = {
+      app       = "backend"
+      component = "ingress"
+    }
+    annotations = {
+      "nginx.ingress.kubernetes.io/proxy-ssl-verify" : "on"
+      "nginx.ingress.kubernetes.io/proxy-ssl-secret" : "backend/photoatom-tls"
+      "nginx.ingress.kubernetes.io/proxy-ssl-name" : "photoatom.backend.svc.cluster.local"
+      "nginx.ingress.kubernetes.io/backend-protocol" : "HTTPS"
+      "nginx.ingress.kubernetes.io/rewrite-target" : "/"
+      "nginx.ingress.kubernetes.io/proxy-body-size" : 0
+    }
+  }
+
+  spec {
+    ingress_class_name = "nginx"
+    tls {
+      hosts       = ["${var.backend_host_name}.${var.photoatom_domain}"]
+      secret_name = "photoatom-ingress-tls"
+    }
+    rule {
+      host = "${var.backend_host_name}.${var.photoatom_domain}"
+      http {
+        path {
+          path = "/"
+          backend {
+            service {
+              name = "photoatom"
+              port {
+                number = 8443
+              }
+            }
+          }
+        }
+      }
+    }
+  }
+}
+
