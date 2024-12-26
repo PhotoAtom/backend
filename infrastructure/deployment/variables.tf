@@ -103,3 +103,9 @@ variable "artifact_version" {
   description = "Artifact Version to be deployed"
   type        = string
 }
+
+// Ingress Variables
+variable "backend_host_name" {
+  description = "Host name for the PhotoAtom Backend"
+  default     = "backend"
+}
