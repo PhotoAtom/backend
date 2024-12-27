@@ -1,4 +1,4 @@
-name: PhotoAtom Backend Deployment onto Self Hosted K3D Cluster
+name: PhotoAtom Backend Infrastructure Deployment onto Self Hosted K3D Cluster
 
 on:
   workflow_dispatch:
