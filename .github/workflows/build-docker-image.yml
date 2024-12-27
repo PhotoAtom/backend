@@ -22,7 +22,7 @@ on:
 jobs:
   build_push_image:
     name: Building and storing PhotoAtom Backend Docker Image
-    uses: PhotoAtom/automations/.github/workflows/build-docker-image.yml@feature/12/tags
+    uses: PhotoAtom/automations/.github/workflows/build-docker-image.yml@main
     with:
       dev_version_name: SNAPSHOT
       image_name: photoatom_backend
