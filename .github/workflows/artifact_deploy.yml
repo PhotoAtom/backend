@@ -10,14 +10,12 @@ on:
         required: false
         description: PhotoAtom Backend version to deploy [LEAVE BLANK TO TAKE LATEST STABLE VERSION]
 
-env:
-  TF_VAR_artifact_version: ${{ inputs.deploy_version == '' && vars.PHOTOATOM_BACKEND_VERSION || inputs.deploy_version }}
-
 jobs:
   backend_deploy:
     name: PhotoAtom Backend Deployment onto Self Hosted K3d Cluster
     uses: PhotoAtom/automations/.github/workflows/tofu-deploy.yml@main
     with:
+      artifact_version: ${{ inputs.deploy_version == '' && vars.PHOTOATOM_BACKEND_VERSION || inputs.deploy_version }}
       deployment_name: PhotoAtom Backend
       folder_path: infrastructure/deployment
       runners: photoatom
