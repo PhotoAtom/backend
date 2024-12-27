@@ -32,4 +32,3 @@ jobs:
       build_path: backend
       version_name: PHOTOATOM_BACKEND_VERSION
     secrets: inherit
-
