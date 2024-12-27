@@ -1,7 +1,6 @@
 name: PhotoAtom Backend Deployment onto Self Hosted K3D Cluster
 
 on:
-  push:
   workflow_dispatch:
     inputs:
       deploy_version:
