@@ -11,7 +11,7 @@ on:
         description: PhotoAtom Backend version to deploy [LEAVE BLANK TO TAKE LATEST STABLE VERSION]
 
 env:
-  TF_VAR_artifact_version: ${{ inputs.deploy_version == '' && var.PHOTOATOM_BACKEND_VERSION || inputs.deploy_version }}
+  TF_VAR_artifact_version: ${{ inputs.deploy_version == '' && vars.PHOTOATOM_BACKEND_VERSION || inputs.deploy_version }}
 
 jobs:
   backend_deploy:
