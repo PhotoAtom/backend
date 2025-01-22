@@ -87,4 +87,8 @@ jobs:
       deployment_name: PhotoAtom Backend Certificates
       folder_path: infrastructure/certificates
       runners: photoatom
+      post_apply_script: |
+        # Wait for PhotoAtom Certificate to be provisioned
+        echo "Waiting for PhotoAtom Certificate to be provisioned"
+        kubectl wait --for=condition=Ready=true certificate/photoatom-ingress-certificate -n backend --timeout=300s
     secrets: inherit
