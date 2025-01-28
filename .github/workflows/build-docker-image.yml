@@ -25,10 +25,11 @@ jobs:
     uses: PhotoAtom/automations/.github/workflows/build-docker-image.yml@main
     with:
       dev_version_name: SNAPSHOT
-      image_name: photoatom_backend
+      image_name: backend
       image_proper_name: PhotoAtom Backend
       pre_build_script: |
         sed -i "s|0.0.1-SNAPSHOT|$SEMVER_VERSION|g" pom.xml
       build_path: backend
       version_name: PHOTOATOM_BACKEND_VERSION
+      repository: "photoatom"
     secrets: inherit
